@@ -10,12 +10,6 @@
 *.userosscache
 *.sln.docstates
 
-# User-specific files (MonoDevelop/Xamarin Studio)
-*.userprefs
-
-# Mono auto generated files
-mono_crash.*
-
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -133,22 +127,9 @@ _TeamCity*
 # DotCover is a Code Coverage Tool
 *.dotCover
 
-# AxoCover is a Code Coverage Tool
-.axoCover/*
-!.axoCover/settings.json
-
 # Visual Studio code coverage results
 *.coverage
 *.coveragexml
-
-# NCrunch
-_NCrunch_*
-.*crunch*.local.xml
-nCrunchTemp_*
-
-# MightyMoose
-*.mm.*
-AutoTest.Net/
 
 # Web workbench (sass)
 .sass-cache/

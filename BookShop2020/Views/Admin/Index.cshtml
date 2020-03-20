@@ -1,0 +1,49 @@
+﻿@using BookShop2020.Models
+@model IEnumerable<BookShop2020.Models.RoleViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2> Список ролей </h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UsersInRole)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <ul>
+                    @foreach (ApplicationUser user in item.UsersInRole)
+                    {
+                        <li>@user.UserName </li>
+                    }
+                </ul>
+
+            </td>
+            <td>
+                @Html.ActionLink("Изменить", "EditUsersList", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Создать новую роль", "CreateRole")
+</p>
+
+
+
+

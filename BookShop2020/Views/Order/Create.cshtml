@@ -1,0 +1,69 @@
+﻿@model BookShop2020.Models.Order
+
+@{
+    ViewBag.Title = "Create";
+}
+<h2>Оформление заказа</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model=>model.Status)
+        @Html.HiddenFor(model => model.DeliveryMethod)
+        @Html.HiddenFor(model => model.TotalPrice)
+        @Html.HiddenFor(model => model.Date)
+        <h3> Ваш заказ, на сумму: </h3>
+        <div class="form-group">
+            @Html.LabelFor(model => model.TotalPrice, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.TotalPrice)
+             </div>
+        </div>
+        <h3> будет доставлен по адресу </h3>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address)
+                @Html.ValidationMessageFor(model => model.Address)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName)
+                @Html.ValidationMessageFor(model => model.LastName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        @Html.ActionLink("Удалить", "Delete", new { id = Model.Id })
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Заказать" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Продолжить покупки", "Delete", new { id = Model.Id })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

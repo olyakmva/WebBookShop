@@ -1,0 +1,80 @@
+﻿@model IEnumerable<BookShop2020.Models.CartItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Ваша корзина</h2>
+
+@{ string msg = (string)ViewBag.Msg;
+    if (msg.Contains("Ваша корзина пуста"))
+    {
+        <h3>@msg</h3>
+    }
+    else
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.SelectBook.Author)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SelectBook.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SelectBook.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SelectBook.Author)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SelectBook.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SelectBook.Price)
+                    </td>
+                    <td>
+                        <input type="number" value="@item.Quantity" onchange="onItemQuantityChanged(@item.Id, this)"/>
+                    </td>
+                    <td>
+                       @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </table>
+        <p>Общая стоимость: <span id="totalCost">@ViewBag.Sum</span></p>
+        <br />
+        @Html.RouteLink("Оформить заказ",
+              new { controller = "Order", action = "Create" })
+    }
+}
+
+@Html.RouteLink("Продолжить покупки",
+              new { controller = "Home", action = "Index" })
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    function onItemQuantityChanged(cartId, elem) {
+
+        axios.post(
+            "/Cart/ChangeItemQuantity",
+            {
+                cartId: cartId,
+                newQuantity: parseInt(elem.value, 10)
+            }
+        ).then((delta) => {
+            var totalCost = parseInt($("#totalCost").text(), 10);
+            totalCost += delta.data;
+            $("#totalCost").text(totalCost.toString());
+        });
+    }
+</script>

@@ -1,0 +1,54 @@
+﻿@model BookShop2020.Models.CartItem
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+
+<h3>Вы уверены, что хотите удалить эту книгу?</h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SelectBook.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SelectBook.Author)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SelectBook.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SelectBook.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SelectBook.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SelectBook.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

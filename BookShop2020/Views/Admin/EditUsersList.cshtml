@@ -1,0 +1,69 @@
+﻿@using BookShop2020.Models
+@model BookShop2020.Models.RoleEditModel
+@{
+    ViewBag.Title = "Изменить роль";
+}
+
+<h2>Изменить роль</h2>
+@Html.ValidationSummary()
+@using (Html.BeginForm())
+{
+    <input type="hidden" name="roleName" value="@Model.Role.Name" />
+    <div class="panel panel-primary">
+        <div class="panel-heading">Добавить в роль <b>@Model.Role.Name</b></div>
+        <table class="table table-striped">
+            @if (!Model.NonMembers.Any())
+            {
+                <tr>
+                    <td colspan="2">Все пользователи в роли</td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>User ID</td>
+                    <td>Добавить в роль</td>
+                </tr>
+                foreach (ApplicationUser user in Model.NonMembers)
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>
+                            <input type="checkbox" name="IdsToAdd" value="@user.Id">
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Удалить из роли <b>@Model.Role.Name</b></div>
+        <table class="table table-striped">
+            @if (!Model.Members.Any())
+            {
+                <tr>
+                    <td colspan="2">Нет пользователей в роли</td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>User ID</td>
+                    <td>Удалить из роли</td>
+                </tr>
+                foreach (ApplicationUser user in Model.Members)
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>
+                            <input type="checkbox" name="IdsToDelete" value="@user.Id">
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    @Html.ActionLink("Отмена", "Index", null, new { @class = "btn btn-default" })
+}
