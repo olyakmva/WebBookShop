@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BookShop2020.Models.Bestseller>
+@{
+    ViewBag.Title = "BestsellerList";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<h2>Список бестселлеров</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TheBook.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TheBook.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TheBook.Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TheBook.Genre.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+       
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheBook.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheBook.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheBook.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheBook.Genre.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+       </tr>
+    }
+</table>
+

@@ -1,5 +1,4 @@
-﻿
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -7,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BookShop2020.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BookShop2020.Controllers
 {
@@ -81,6 +81,10 @@ namespace BookShop2020.Controllers
                     if (UserManager.IsInRole(user.Id,"admin"))
                     {
                         return RedirectToActionPermanent("Index", "Admin");
+                    }
+                    if (UserManager.IsInRole(user.Id, "manager"))
+                    {
+                        return RedirectToActionPermanent("Index", "Book");
                     }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
@@ -158,6 +162,7 @@ namespace BookShop2020.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRole(user.Id, "user");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

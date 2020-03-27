@@ -14,7 +14,7 @@ namespace BookShop2020.Models
         [Range(1, 50000, ErrorMessage = "Недопустимая сумма")]
         [Display(Name = "Общая стоимость")]
         public decimal TotalPrice { get; set; }
-
+        [Display(Name = "Дата заказа")]
         public DateTime Date { get; set; } // дата покупки
         public IEnumerable<Item> Items { get; set; }
 
@@ -33,7 +33,7 @@ namespace BookShop2020.Models
 
         [Display(Name = "Способ доставки")]
         public string DeliveryMethod { get; set; }
-
+        [Display(Name = "Статус")]
         public string Status { get; set; }
 
     }

@@ -1,7 +1,7 @@
 ﻿@using BookShop2020.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Вход на сайт";
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -51,11 +51,11 @@
             }
         </section>
     </div>
-    <div class="col-md-4">
+    @*<div class="col-md-4">
         <section id="socialLoginForm">
             @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
         </section>
-    </div>
+    </div>*@
 </div>
 
 @section Scripts {

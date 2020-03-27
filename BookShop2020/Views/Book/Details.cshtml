@@ -1,0 +1,57 @@
+﻿@model BookShop2020.Models.Book
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<h2>Информация о книге</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Назад к списку книг", "Index")
+</p>

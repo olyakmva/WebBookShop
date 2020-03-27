@@ -175,14 +175,17 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Bestseller.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\BookContext.cs" />
     <Compile Include="Models\CartItem.cs" />
@@ -262,6 +265,15 @@
     <Content Include="Views\Admin\EditUsersList.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Shared\_ManagerLayout.cshtml" />
+    <Content Include="Views\Manager\BestsellerList.cshtml" />
+    <Content Include="Views\Manager\Details.cshtml" />
+    <Content Include="Views\Manager\OrdersList.cshtml" />
+    <Content Include="Views\Book\Create.cshtml" />
+    <Content Include="Views\Book\Delete.cshtml" />
+    <Content Include="Views\Book\Details.cshtml" />
+    <Content Include="Views\Book\Edit.cshtml" />
+    <Content Include="Views\Book\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

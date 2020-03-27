@@ -36,7 +36,7 @@ namespace BookShop2020
             var admin = new ApplicationUser { UserName = "boss@mail.ru", Email = "boss@mail.ru"};
             string password = "_ad12min";
             var result = userManager.Create(admin, password);
-
+            // Менеджер man@mm.ru Man_123
             // если создание пользователя прошло успешно
             if (result.Succeeded)
             {

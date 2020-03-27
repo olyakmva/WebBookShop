@@ -1,0 +1,108 @@
+﻿@model BookShop2020.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<h2> Сведения о заказе </h2>
+
+<div>
+   <table class="table">
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Date)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.LastName)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Address)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalPrice)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.TotalPrice)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryMethod)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.DeliveryMethod)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Status)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Items)
+            </th>
+            <td>
+                <table>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TheBook.Author)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TheBook.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TheBook.Price)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </td>
+        </tr>
+
+
+    </table>
+</div>
+<p>
+   @Html.ActionLink("Назад", "OrdersList")
+</p>
