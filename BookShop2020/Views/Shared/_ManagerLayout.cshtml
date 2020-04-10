@@ -9,34 +9,37 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar fixed-top bg-dark navbar-expand-lg navbar-dark">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("На главную", "Index", "Home", null, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @Html.ActionLink("Наш книжный", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                
+            <div class="navbar-collapse collapse" id="navbarSupportedContent">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Управление товарами <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Создание новой книги", "Create", "Book")</li>
-                            <li>@Html.ActionLink("Список книг", "Index", "Book")</li>
-                        </ul>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Управление товарами
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item">@Html.ActionLink("Создание новой книги", "Create", "Book", null, new { @class = "nav-link" })</a>
+                            <a class="dropdown-item"> @Html.ActionLink("Список книг", "Index", "Book", null, new { @class = "nav-link" })</a>
+                            <a class="dropdown-item"> @Html.ActionLink("Остатки", "GetSmallNumberBooks", "Book", null, new { @class = "nav-link" })</a>
+                        </div>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Заказы и статистика <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Лучшие продажи", "BestsellerList", "Manager")</li>
-                            <li>@Html.ActionLink("Заказы", "OrdersList", "Manager")</li>
-                            <li>@Html.ActionLink("Продажи по категориям", "GenreList", "Manager")</li>
-                        </ul>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Заказы и статистика
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink2">
+                            <a class="dropdown-item">@Html.ActionLink("Лучшие продажи", "BestsellerList", "Manager", null, new { @class = "nav-link" })</a>
+                            <a class="dropdown-item"> @Html.ActionLink("Заказы", "OrdersList", "Manager", null, new { @class = "nav-link" })</a>
+                            <a class="dropdown-item"> @Html.ActionLink("Продажи по категориям", "GenreList", "Manager", null, new { @class = "nav-link" })</a>
+                        </div>
                     </li>
-
                 </ul>
                 
                 @Html.Partial("_LoginPartial")

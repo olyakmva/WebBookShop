@@ -50,6 +50,12 @@
         </dd>
 
     </dl>
+    @if (Model.ImageUrl != null)
+    {
+        <img src="@Url.Content("~/Images/")@Model.ImageUrl" class="smallImg" />
+    }
+
+
 </div>
 <p>
     @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |

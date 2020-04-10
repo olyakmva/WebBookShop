@@ -1,7 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using BookShop2020.Models;
 
@@ -12,6 +17,9 @@ namespace BookShop2020.Controllers
     {
         private BookContext db = new BookContext();
 
+        private const int Height = 200, Width = 150;
+
+        private const int MinBookQuantity = 5;
         // GET: /Book/
         public ActionResult Index(int? categoryId)
         {
@@ -59,17 +67,68 @@ namespace BookShop2020.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Author,Price,Year,CategoryId")] Book book)
+        public ActionResult Create([Bind(Include = "Id,Name,Author,Price,Year,CategoryId,Number")] Book book, HttpPostedFileBase upload)
         {
-            if (ModelState.IsValid)
+            if (upload != null)
             {
-                db.Books.Add(book);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                string fileName = System.IO.Path.GetFileName(upload.FileName);
+                if(CheckByGraphicsFormat(fileName))
+                {
+                    SaveImage(upload, fileName);
+                    book.ImageUrl = fileName;
+                }
             }
-
-            return View(book);
+            if (!ModelState.IsValid) return View(book);
+            db.Books.Add(book);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
+
+        private void SaveImage(HttpPostedFileBase upload, string fileName)
+        {
+            var image = new Bitmap(upload.InputStream);
+            var smallImg = ResizeImage(image, Width, Height);
+            smallImg.Save(Server.MapPath("~/Images/" + fileName));
+        }
+
+        private bool CheckByGraphicsFormat(string fileName)
+        {
+            var ext = fileName.Substring(fileName.Length - 3);
+            return string.Compare(ext, "png", StringComparison.Ordinal) == 0 ||
+                   string.Compare(ext, "jpg", StringComparison.Ordinal) == 0;
+        }
+
+        /// <summary>
+        /// Resize the image to the specified width and height.
+        /// </summary>
+        /// <param name="image">The image to resize.</param>
+        /// <param name="width">The width to resize to.</param>
+        /// <param name="height">The height to resize to.</param>
+        /// <returns>The resized image.</returns>
+        private Bitmap ResizeImage(Image image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+            return destImage;
+        }
+
+
 
         // GET: /Book/Edit/5
         public ActionResult Edit(int? id)
@@ -96,15 +155,21 @@ namespace BookShop2020.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Author,Price,Year,CategoryId")] Book book)
+        public ActionResult Edit([Bind(Include = "Id,Name,Author,Price,Year,CategoryId,Number")] Book book, HttpPostedFileBase upload)
         {
-            if (ModelState.IsValid)
+            if (upload != null)
             {
-                db.Entry(book).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                string fileName = System.IO.Path.GetFileName(upload.FileName);
+                if (CheckByGraphicsFormat(fileName))
+                {
+                    SaveImage(upload, fileName);
+                    book.ImageUrl = fileName;
+                }
             }
-            return View(book);
+            if (!ModelState.IsValid) return View(book);
+            db.Entry(book).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: /Book/Delete/5
@@ -134,7 +199,11 @@ namespace BookShop2020.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        public ActionResult GetSmallNumberBooks()
+        {
+            var books = db.Books.Include(b => b.Genre).Where(b => b.Number <= MinBookQuantity).ToList(); 
+            return View(books);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

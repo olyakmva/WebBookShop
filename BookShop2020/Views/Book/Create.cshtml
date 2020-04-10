@@ -7,67 +7,78 @@
 
 <h2>Добавить новую книгу</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Book", FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        
-        <hr />
-        @Html.ValidationSummary(true)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Author, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Author)
+            @Html.ValidationMessageFor(model => model.Author)
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Author, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Author)
-                @Html.ValidationMessageFor(model => model.Author)
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price)
-                @Html.ValidationMessageFor(model => model.Price)
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price)
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Year, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Year)
-                @Html.ValidationMessageFor(model => model.Year)
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Year, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Year)
+            @Html.ValidationMessageFor(model => model.Year)
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.Label("Жанр:", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CategoryId, ViewBag.list as SelectList)
-            </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Создать" class="btn btn-default" />
-                </div>
-            </div>
+    <div class="form-group">
+        @Html.Label("Жанр:", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.CategoryId, ViewBag.list as SelectList)
         </div>
-}
-
-<div>
-    @Html.ActionLink("Назад к списку книг", "Index")
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Number, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Number)
+            @Html.ValidationMessageFor(model => model.Number)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Выберите файл для загрузки", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="upload" /><br>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Создать" class="btn btn-default" />
+        </div>
+    </div>
 </div>
+<hr/>
 
+    <div>
+        @Html.ActionLink("Назад к списку книг", "Index")
+    </div>
+}
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -21,6 +21,14 @@ namespace BookShop2020.Controllers
             {
                books = books.Where(b => b.CategoryId == categoryId); 
             }
+
+            var list = books.ToList();
+            foreach (var book in list)
+            {
+                if(book.ImageUrl!=null)
+                    continue;
+                book.ImageUrl = "book.jpg";
+            }
             return View(books.ToList());
         }
 

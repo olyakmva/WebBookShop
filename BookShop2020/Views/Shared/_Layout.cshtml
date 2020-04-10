@@ -9,22 +9,21 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar fixed-top bg-dark navbar-expand-lg navbar-dark">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Наш книжный", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Главная", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Новости", "About", "Home")</li>
-                    <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Корзина", "Index", "Cart")</li>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @Html.ActionLink("Наш книжный", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+            <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">@Html.ActionLink("Главная", "Index", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Новости", "About", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Контакты", "Contact", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Корзина", "Index", "Cart", null, htmlAttributes: new { @class = "nav-link" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

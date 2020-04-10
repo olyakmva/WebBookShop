@@ -35,7 +35,12 @@ namespace BookShop2020.Models
 
         [Display(Name = "Жанр")]
         public Category Genre { get; set; }
-    }
-    
+        [HiddenInput(DisplayValue = false)]
+        public string ImageUrl { get; set; }
 
+        [Required]
+        [Range(0, 20000, ErrorMessage = "Недопустимое количество")]
+        [Display(Name = "Количество")]
+        public int Number { get; set; }
+    }
 }

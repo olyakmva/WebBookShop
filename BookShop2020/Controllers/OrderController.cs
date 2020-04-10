@@ -36,10 +36,18 @@ namespace BookShop2020.Controllers
             decimal price = 0;
             foreach (var i in items)
             {
-                var b = db.Books.Find(i.BookId);
-                if (b == null) continue;
-                var tm = new Item() {BookId = i.BookId, Quantity = i.Quantity, TheBook = b};
-                price += b.Price * i.Quantity;
+                var book = db.Books.Find(i.BookId);
+                if (book == null) continue;
+                var tm = new Item() {BookId = i.BookId, Quantity = i.Quantity, TheBook = book};
+                if (book.Number < i.Quantity)
+                {
+                    i.Quantity = book.Number;
+                }
+
+                book.Number -= i.Quantity;
+                db.Entry(book).State = EntityState.Modified;
+                db.SaveChanges();
+                price += book.Price * i.Quantity;
                 goods.Add(tm);
             }
 
@@ -96,6 +104,19 @@ namespace BookShop2020.Controllers
 
             var items = db.Items.Where(x => x.OrderId == order.Id);
             db.Items.RemoveRange(items);
+            var list = items.ToList();
+            foreach (var item in list)
+            {
+                var book = db.Books.Find(item.BookId);
+                if (book != null)
+                {
+                    book.Number += item.Quantity;
+                    db.Entry(book).State = EntityState.Modified;
+                }
+
+                db.SaveChanges();
+            }
+
             db.Orders.Remove(order);
             db.SaveChanges();
             return RedirectToAction("Index", "Home");

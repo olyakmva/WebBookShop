@@ -80,5 +80,41 @@ namespace BookShop2020.Controllers
 
             return View(order);
         }
+
+        public ActionResult GenreList()
+        {
+            var orders = db.Orders.ToList();
+            var list = new Dictionary<int, GenreSoldViewModel>();
+            foreach (var order in orders)
+            {
+                var order1 = order;
+                var books = db.Items.Where(i => i.OrderId == order1.Id).ToList();
+                foreach (var b in books)
+                {
+                    var book = db.Books.Find(b.BookId);
+                    if (book == null) continue;
+                    if (book.CategoryId.HasValue && list.ContainsKey(book.CategoryId.Value))
+                    {
+                        list[book.CategoryId.Value].Quantity += b.Quantity;
+                        list[book.CategoryId.Value].TotalPrice += (int)Math.Round(b.Quantity * book.Price);
+                    }
+                    else
+                    {
+                        if (!book.CategoryId.HasValue)
+                            continue;
+                        var gs = new GenreSoldViewModel()
+                        {
+                            Quantity = b.Quantity,
+                            TotalPrice = (int)Math.Round(b.Quantity * book.Price),
+                            Name = db.Categories.Find(book.CategoryId.Value)?.Name
+                        };
+                        list.Add(book.CategoryId.Value, gs);
+                    }
+                }
+            }
+
+            return View(list.Values);
+
+        }
     }
 }

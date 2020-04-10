@@ -25,6 +25,9 @@
             @Html.DisplayNameFor(model => model.Year)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Number)
+        </th>
+        <th>
             @Html.Label("Жанр")
         </th>
         <th></th>
@@ -45,12 +48,15 @@
             @Html.DisplayFor(modelItem => item.Year)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Number)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Genre.Name)
         </td>
         <td>
-            @Html.ActionLink("Изменить", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Подробно", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
+            @Html.ActionLink("Изменить", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Подробно", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
         </td>
     </tr>
 }
