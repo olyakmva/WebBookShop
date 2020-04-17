@@ -23,12 +23,12 @@ namespace BookShop2020.Controllers
         // GET: /Book/
         public ActionResult Index(int? categoryId)
         {
-            List<Book> bookList = db.Books.ToList();
+            List<Book> bookList = db.Books.OrderBy(b => b.Author).ToList();
             if (categoryId != null && categoryId != 0)
             {
                 var category = db.Categories.Find(categoryId);
                 if (category != null)
-                    bookList = category.Books.ToList();
+                    bookList = category.Books.OrderBy(b => b.Author).ToList();
             }
 
             var categoriesList = db.Categories.ToList();
@@ -155,7 +155,7 @@ namespace BookShop2020.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Author,Price,Year,CategoryId,Number")] Book book, HttpPostedFileBase upload)
+        public ActionResult Edit([Bind(Include = "Id,Name,Author,Price,Year,CategoryId,Number,ImageUrl")] Book book, HttpPostedFileBase upload)
         {
             if (upload != null)
             {
@@ -203,6 +203,20 @@ namespace BookShop2020.Controllers
         {
             var books = db.Books.Include(b => b.Genre).Where(b => b.Number <= MinBookQuantity).ToList(); 
             return View(books);
+        }
+
+        public ActionResult AddCategory()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddCategory([Bind(Include = "Id,Name")] Category category)
+        {
+            if (!ModelState.IsValid) return View(category);
+            db.Categories.Add(category);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
         protected override void Dispose(bool disposing)
         {

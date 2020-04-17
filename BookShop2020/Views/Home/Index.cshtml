@@ -1,4 +1,5 @@
 ﻿@model List<BookShop2020.Models.Book>
+@using System;
 
 @{
     ViewBag.Title = "Index";
@@ -14,52 +15,21 @@
     </div>
 </form>
 
-@for (int i = 0; i < Model.Count; i += 3)
-{
-  <div class="row justify-content-around">
-     <div class="col-md-auto">
-     <div class="card">
-         <img src="@Url.Content("~/Images/")@Model[i].ImageUrl" class="smallImg card-img-top" alt="Обложка"/>
-         <ul class="list-group list-group-flush">
-             <li class="list-group-item">@Model[i].Author</li>
-             <li class="list-group-item">@Model[i].Name</li>
-             <li class="list-group-item">@Model[i].Price</li>
-         </ul>
-         <a href="#" class="btn btn-primary"> @Html.RouteLink("В корзину",
-                                                      new {controller = "Cart", action = "Add", bookId = @Model[i].Id})</a>
-         </div>
-     </div>
-     @if ((i + 1) < Model.Count)
-     {
-            <div class="col-md-auto">
-                <div class="card">
-                    <img src="@Url.Content("~/Images/")@Model[i+1].ImageUrl" class="smallImg card-img-top" alt="Обложка"/>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">@Model[i+1].Author</li>
-                        <li class="list-group-item">@Model[i+1].Name</li>
-                        <li class="list-group-item">@Model[i+1].Price</li>
-                    </ul>
-                    <a href="#" class="btn btn-primary"> @Html.RouteLink("В корзину",
-                                                             new {controller = "Cart", action = "Add", bookId = @Model[i+1].Id})</a>
+<div class="justify-content-around" style="display: flex; flex-wrap: wrap">
+    @foreach (var t in Model)
+    {
+        <div class="col-md-auto">
+            <div class="card my-1 border-0" style="width: 14rem;">
+                <img src="@Url.Content("~/Images/")@t.ImageUrl" class="smallImg card-img-top" alt="Обложка" />
+                <div class="card-body">
+                    <h5 class="card-title">@Math.Truncate(t.Price)</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@t.Name</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">@t.Author</h6>
+                    <p class="card-text">@t.Genre.Name </p>
+                    @Html.RouteLink("В корзину",
+                            new {controller = "Cart", action = "Add", bookId = t.Id}, new { @class="btn btn-secondary" })
                 </div>
             </div>
-
-        }
-     @if ((i + 2) < Model.Count)
-     {
-         <div class="col-md-auto">
-             <div class="card">
-                 <img src="@Url.Content("~/Images/")@Model[i+2].ImageUrl" class="smallImg card-img-top" alt="Обложка"/>
-                 <ul class="list-group list-group-flush">
-                     <li class="list-group-item">@Model[i+2].Author</li>
-                     <li class="list-group-item">@Model[i+2].Name</li>
-                     <li class="list-group-item">@Model[i+2].Price</li>
-                 </ul>
-                 <a href="#" class="btn btn-primary"> @Html.RouteLink("В корзину",
-                                                          new {controller = "Cart", action = "Add", bookId = @Model[i+2].Id})</a>
-             </div>
-         </div>
-
-     }
-    </div>
-}
+        </div>
+    }
+</div>       

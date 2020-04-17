@@ -54,9 +54,9 @@
             @Html.DisplayFor(modelItem => item.Genre.Name)
         </td>
         <td>
-            @Html.ActionLink("Изменить", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Подробно", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+            @Html.ActionLink(HttpUtility.HtmlDecode("&#9999;"), "Edit", new { id = item.Id }) |
+            @Html.ActionLink(HttpUtility.HtmlDecode("&#128270;"), "Details", new { id = item.Id }) |
+            @Html.ActionLink(HttpUtility.HtmlDecode("&#10060;"), "Delete", new { id = item.Id })
         </td>
     </tr>
 }

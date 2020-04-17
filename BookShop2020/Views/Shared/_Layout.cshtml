@@ -9,11 +9,9 @@
 
 </head>
 <body>
-    <div class="navbar fixed-top bg-dark navbar-expand-lg navbar-dark">
+    <div class="navbar fixed-top bg-dark navbar-expand-lg navbar-dark mb-2">
         <div class="container">
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent">
-                <span class="navbar-toggler-icon"></span>
-                <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
             </button>
             @Html.ActionLink("Наш книжный", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
@@ -25,11 +23,17 @@
                     <li class="nav-item">@Html.ActionLink("Контакты", "Contact", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Корзина", "Index", "Cart", null, htmlAttributes: new { @class = "nav-link" })</li>
                 </ul>
+            @using (Html.BeginForm("Search", "Home", FormMethod.Post,
+                new {enctype = "multipart/form-data", @class = "form-inline ml-auto mr-auto" }))
+            {
+                <input class="form-control mr-sm-2" type="search" placeholder="Искать" aria-label="Search" name="searchString">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Поиск</button>
+            }
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content mt-2">
         @RenderBody()
         <hr />
         <footer>

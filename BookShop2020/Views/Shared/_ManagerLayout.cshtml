@@ -26,6 +26,7 @@
                         </a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item">@Html.ActionLink("Создание новой книги", "Create", "Book", null, new { @class = "nav-link" })</a>
+                            <a class="dropdown-item">@Html.ActionLink("Создание новой категории", "AddCategory", "Book", null, new { @class = "nav-link" })</a>
                             <a class="dropdown-item"> @Html.ActionLink("Список книг", "Index", "Book", null, new { @class = "nav-link" })</a>
                             <a class="dropdown-item"> @Html.ActionLink("Остатки", "GetSmallNumberBooks", "Book", null, new { @class = "nav-link" })</a>
                         </div>

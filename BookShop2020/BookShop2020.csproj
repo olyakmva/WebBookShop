@@ -388,6 +388,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Manager\GenreList.cshtml" />
     <Content Include="Views\Book\GetSmallNumberBooks.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Book\AddCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

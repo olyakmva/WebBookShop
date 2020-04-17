@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BookShop2020.Models.Book>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br/>
+<h2> @ViewBag.Message[0]</h2>
+
+@if (ViewBag.Message.Length > 1)
+{
+    <h4>@ViewBag.Message[1]</h4>
+}
+
+<div class="justify-content-around" style="display: flex; flex-wrap: wrap">
+        @foreach (var t in Model)
+        {
+            <div class="col-md-auto">
+                <div class="card my-1 border-0" style="width: 14rem;">
+                    <img src="@Url.Content("~/Images/")@t.ImageUrl" class="smallImg card-img-top" alt="Обложка" />
+                    <div class="card-body">
+                        <h5 class="card-title">@Math.Truncate(t.Price)</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@t.Name</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">@t.Author</h6>
+                        <p class="card-text">@t.Genre.Name </p>
+                        @Html.RouteLink("В корзину",
+                            new {controller = "Cart", action = "Add", bookId = t.Id}, new { @class="btn btn-secondary" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>

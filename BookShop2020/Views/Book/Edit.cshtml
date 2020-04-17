@@ -4,74 +4,73 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
-
+<br/>
 <h2>Внесение изменений в запись о книге</h2>
-
 
 @using (Html.BeginForm("Edit", "Book", FormMethod.Post,
     new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
-<div class="form-horizontal">
     <hr />
     @Html.ValidationSummary(true)
     @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.ImageUrl)
     
-    <div class="form-group">
-        @Html.LabelFor(model => model.Author, new { @class = "control-label col-md-2" })
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Author, new { @class = "col-form-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Author)
             @Html.ValidationMessageFor(model => model.Author)
         </div>
     </div>
     
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Name, new { @class = "col-form-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Name)
             @Html.ValidationMessageFor(model => model.Name)
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Price, new { @class = "col-form-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Price)
             @Html.ValidationMessageFor(model => model.Price)
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Year, new { @class = "control-label col-md-2" })
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Year, new { @class = "col-form-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Year)
             @Html.ValidationMessageFor(model => model.Year)
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Number, new { @class = "control-label col-md-2" })
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Number, new { @class = "col-form-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Number)
             @Html.ValidationMessageFor(model => model.Number)
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.Label("Жанр", new { @class = "control-label col-md-2" })
+    <div class="form-group row">
+        @Html.Label("Жанр", new { @class = "col-form-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.CategoryId, ViewBag.list as SelectList)
         </div>
     </div>
-    <div class="form-group">
-        @Html.Label("Изображение", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="form-group row">
+        @Html.Label("Изображение", htmlAttributes: new { @class = "col-form-label col-md-2" })
         <div class="col-md-10">
             @if (Model.ImageUrl != null)
                 { <img src="@Url.Content("~/Images/")@Model.ImageUrl" class="smallImg" />}
         </div>
 
-        @Html.Label("Выберите файл для загрузки", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Выберите файл для загрузки", htmlAttributes: new { @class = "col-form-label col-md-2" })
         <div class="col-md-10">
             <input type="file" name="upload" />
             <br />
@@ -79,11 +78,10 @@
 
     </div>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Сохранить изменения" class="btn btn-default" />
+        <div class="offset-2 col-md-10">
+            <input type="submit" value="Сохранить изменения" class="btn btn-secondary" />
         </div>
     </div>
-</div>
 }
 
 <div>
