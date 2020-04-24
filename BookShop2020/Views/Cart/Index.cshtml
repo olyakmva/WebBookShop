@@ -46,7 +46,7 @@
                         <input type="number" value="@item.Quantity" onchange="onItemQuantityChanged(@item.Id, this)"/>
                     </td>
                     <td>
-                       @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                       @Html.ActionLink("Удалить", "Delete", new { id = item.Id }, new { @class = "btn btn-info" })
                     </td>
                 </tr>
             }
@@ -54,12 +54,12 @@
         <p>Общая стоимость: <span id="totalCost">@ViewBag.Sum</span></p>
         <br />
         @Html.RouteLink("Оформить заказ",
-              new { controller = "Order", action = "Create" })
+              new { controller = "Order", action = "Create" }, new { @class="btn btn-secondary"})
     }
 }
 
 @Html.RouteLink("Продолжить покупки",
-              new { controller = "Home", action = "Index" })
+              new { controller = "Home", action = "Index" }, new { @class = "btn btn-info" })
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>

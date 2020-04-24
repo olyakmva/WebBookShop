@@ -19,12 +19,12 @@ namespace BookShop2020.Models
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Длина строки должна быть от 3 до 50 символов")]
         [Display(Name = "Название")]
         public string Name { get; set; } // название книги
-                
         
         [Required]
         [Range(0, 20000, ErrorMessage = "Недопустимая цена")]
         [Display(Name = "Цена")]
-        public decimal Price { get; set; } // цена
+        public int Price { get; set; } // цена
+
         [Required]
         [Range(1700, 2020, ErrorMessage = "Недопустимый год")]
         [Display(Name = "Год издания")]

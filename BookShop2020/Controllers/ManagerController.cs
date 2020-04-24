@@ -96,7 +96,7 @@ namespace BookShop2020.Controllers
                     if (book.CategoryId.HasValue && list.ContainsKey(book.CategoryId.Value))
                     {
                         list[book.CategoryId.Value].Quantity += b.Quantity;
-                        list[book.CategoryId.Value].TotalPrice += (int)Math.Round(b.Quantity * book.Price);
+                        list[book.CategoryId.Value].TotalPrice += b.Quantity * book.Price;
                     }
                     else
                     {
@@ -105,7 +105,7 @@ namespace BookShop2020.Controllers
                         var gs = new GenreSoldViewModel()
                         {
                             Quantity = b.Quantity,
-                            TotalPrice = (int)Math.Round(b.Quantity * book.Price),
+                            TotalPrice = b.Quantity * book.Price,
                             Name = db.Categories.Find(book.CategoryId.Value)?.Name
                         };
                         list.Add(book.CategoryId.Value, gs);

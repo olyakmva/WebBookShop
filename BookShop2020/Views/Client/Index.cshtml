@@ -1,0 +1,41 @@
+﻿@model BookShop2020.Models.Client
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <br />
+            <h3> Персональный раздел </h3>
+            <hr />
+            <br />
+            <h4>Уважаемый(ая) @Model.Name @Model.LastName </h4>
+
+            <p>
+                Ваша текущая накопительная скидка: @Model.CurrentDiscount % .
+            </p>
+            <p>
+                Подробнее об этой и других скидках Вы можете посмотреть @Html.RouteLink("здесь.", new { controller = "Home", action = "About" }, new { @class = "font-weight-bold" })
+            </p>
+
+            <p>
+                Стоимость товаров (за вычетом скидок) в выполненных (полученных и оплаченных) заказах:
+                <span class="font-weight-bold">@Model.TotalOrdersCost</span> руб.
+            </p>
+            <p>Всего Вы сделали <span class="font-weight-bold">@Model.OrdersNumber</span> заказов </p>
+
+            <p>
+                На основании этих данных рассчитывается Ваша накопительная скидка.
+                Обратите внимание, что при подсчёте сумм учитываются только
+                полученные и оплаченные заказы: если какой-либо заказ ещё не получен
+                Вами или деньги за него ещё не поступили
+                на наш счёт, то такой заказ не учитывается при начислении накопительной скидки.
+            </p>
+
+        </div>
+    </div>
+</div>
+        

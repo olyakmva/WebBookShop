@@ -179,6 +179,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
@@ -190,6 +191,10 @@
     <Compile Include="Migrations\202004061327360_MigrateDb.Designer.cs">
       <DependentUpon>202004061327360_MigrateDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004190610035_MigrateDB.cs" />
+    <Compile Include="Migrations\202004190610035_MigrateDB.Designer.cs">
+      <DependentUpon>202004190610035_MigrateDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Bestseller.cs" />
@@ -197,6 +202,7 @@
     <Compile Include="Models\BookContext.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Client.cs" />
     <Compile Include="Models\GenreSoldViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -220,6 +226,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\cup.jpg" />
+    <Content Include="Images\gift.jpg" />
+    <Content Include="Images\shelf.jpg" />
     <Content Include="libman.json" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -390,6 +399,7 @@
     <Content Include="Views\Book\GetSmallNumberBooks.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Book\AddCategory.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
@@ -407,9 +417,7 @@
       <DependentUpon>202004061327360_MigrateDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Images\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

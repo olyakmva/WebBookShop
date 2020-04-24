@@ -20,7 +20,7 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">@Html.ActionLink("Главная", "Index", "Home", null, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Новости", "About", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Контакты", "Contact", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Контакты", "About", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Корзина", "Index", "Cart", null, htmlAttributes: new { @class = "nav-link" })</li>
                 </ul>
             @using (Html.BeginForm("Search", "Home", FormMethod.Post,

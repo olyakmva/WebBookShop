@@ -4,64 +4,117 @@
     ViewBag.Title = "Create";
 }
 <h2>Оформление заказа</h2>
+<div class="container">
+    <div class="row">
+        <div class="col">
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-   
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model=>model.Status)
-        @Html.HiddenFor(model => model.DeliveryMethod)
-        @Html.HiddenFor(model => model.TotalPrice)
-        @Html.HiddenFor(model => model.Date)
-        <h3> Ваш заказ, на сумму: </h3>
-        <div class="form-group row">
-            @Html.LabelFor(model => model.TotalPrice, new { @class = "col-form-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.TotalPrice)
-             </div>
-        </div>
-        <h3> будет доставлен по адресу </h3>
-        <div class="form-group row">
-            @Html.LabelFor(model => model.Address, new { @class = "col-form-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Address)
-                @Html.ValidationMessageFor(model => model.Address)
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <hr />
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.Status)
+                @Html.HiddenFor(model => model.DeliveryMethod)
+                @Html.HiddenFor(model => model.Date)
+                @Html.HiddenFor(model => model.TotalPrice)
+                <h3> Ваш заказ, на сумму: </h3>
+
+                if (@ViewBag.Discount > 0)
+                {
+                    <div class="form-group row">
+                        <div class="col-md-2">
+                           @ViewBag.Cost p.
+                        </div>
+                        <div class="col-md-3">
+                            Скидка: @ViewBag.Discount p.
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-2">
+                            Итого:
+                        </div>
+                        <div class="col-md-3">
+                            <span class="font-weight-bold">@Model.TotalPrice p.</span>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.TotalPrice, new {@class = "col-form-label col-md-2"})
+                        <div class="col-md-3">
+                            @Html.DisplayFor(model => model.TotalPrice) p.
+                        </div>
+                    </div>
+                }
+
+                <h3> будет доставлен по адресу </h3>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Address, new { @class = "col-form-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Address)
+                        @Html.ValidationMessageFor(model => model.Address)
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.LastName, new { @class = "col-form-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.LastName)
+                        @Html.ValidationMessageFor(model => model.LastName)
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Name, new { @class = "col-form-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Name)
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="offset-2 col-md-6">
+                        @Html.ActionLink("Удалить", "Delete", new { id = Model.Id }, new { @class = "btn btn-info" })
+                        <input type="submit" value="Заказать" class="btn btn-secondary" />
+                    </div>
+                </div>
+
+            }
+
+            <div>
+                @Html.ActionLink("Продолжить покупки", "Delete", new { id = Model.Id })
             </div>
         </div>
 
-        <div class="form-group row">
-            @Html.LabelFor(model => model.LastName, new { @class = "col-form-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName)
-                @Html.ValidationMessageFor(model => model.LastName)
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div class="col">
+                <h4> Уважаемый покупатель! </h4>
+                <p> Вы можете оформить заказ в нашем магазине без регистрации. </p>
+                <p>
+                    Зарегистрированные пользователи автоматически принимают участие
+                    в нашей скидочной программе: скидка на все 5% уже после первого заказа!
+                </p>
+                <p> Подробнее о нашей программе лояльности вы можете почитать
+                    @Html.RouteLink("здесь.", new { controller = "Home", action = "About"}, new { @class = "font-weight-bold" }))
+                </p>
+                
+                <div class="row">
+                    <div class="col">
+                        @Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-info" })
+                     </div>
+                    <div class="col">
+                        @Html.ActionLink("Вход", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-info" })
+                    </div>
+                </div>
+
             </div>
+        }
         </div>
-
-        <div class="form-group row">
-            @Html.LabelFor(model => model.Name, new { @class = "col-form-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-        </div>
-
-    <div class="form-group row">
-        @Html.ActionLink("Удалить", "Delete", new { id = Model.Id }, new{@class = "btn btn-secondary" })
-        <div class="offset-2 col-md-10">
-            <input type="submit" value="Заказать" class="btn btn-secondary"/>
-        </div>
-    </div>
-
-}
-
-<div>
-    @Html.ActionLink("Продолжить покупки", "Delete", new { id = Model.Id })
+       
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

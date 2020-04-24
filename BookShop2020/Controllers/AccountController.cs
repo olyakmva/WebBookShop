@@ -6,7 +6,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BookShop2020.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BookShop2020.Controllers
 {

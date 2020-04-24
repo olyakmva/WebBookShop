@@ -4,11 +4,11 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
-
+<br/>
 <h2>Список книг</h2>
 
 <p>
-    @Html.ActionLink("Добавить книгу", "Create")
+    @Html.ActionLink("Добавить книгу", "Create", null,new{@class ="btn btn-secondary "} )
 </p>
 <table class="table">
     <tr>
