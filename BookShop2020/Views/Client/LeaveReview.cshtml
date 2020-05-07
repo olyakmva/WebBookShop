@@ -1,0 +1,55 @@
+﻿@model BookShop2020.Models.Review
+@using BookShop2020.Models
+
+@{
+    ViewBag.Title = "LeaveReview";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Отзыв о книге</h2>
+<br />
+<hr />
+<div class="row">
+    <div class=" offset-2 col-3">
+        @{ Book book = ViewBag.Book; }
+        <div class="card my-1 border-0" style="width: 14rem;">
+            <img src="@Url.Content("~/Images/")@book.ImageUrl" class="smallImg card-img-top" alt="Обложка" />
+            <div class="card-body">
+                <h5 class="card-title">@book.Price p.</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@book.Name</h6>
+                <h6 class="card-subtitle mb-2 text-muted">@book.Author</h6>
+                <p class="card-text">@book.Genre.Name </p>
+                @Html.RouteLink("В корзину",
+                    new {controller = "Cart", action = "Add", bookId = book.Id}, new { @class="btn btn-secondary" })
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.ClientId)
+            @Html.HiddenFor(model => model.BookId)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "col-form-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+            <div class="form-group row">
+                <div class="offset-2 col-md-10">
+                    <input type="submit" value="Оставить отзыв" class="btn btn-secondary" />
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+<div>
+    @Html.ActionLink("Назад к списку", "Comments")
+</div>

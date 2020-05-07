@@ -1,0 +1,27 @@
+﻿@model IEnumerable<BookShop2020.Models.Book>
+
+@{
+    ViewBag.Title = "Comments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br/>
+<h3>Книги, которые Вы покупали</h3>
+<h4>Оставьте отзыв, он поможет сделать выбор другим покупателям </h4>
+
+<div class="justify-content-around" style="display: flex; flex-wrap: wrap">
+    @foreach (var t in Model)
+    {
+        <div class="col-md-auto">
+            <div class="card my-1 border-0" style="width: 14rem;">
+                <img src="@Url.Content("~/Images/")@t.ImageUrl" class="smallImg card-img-top" alt="Обложка" />
+                <div class="card-body">
+                    <h5 class="card-title">@t.Price p.</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@t.Name</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">@t.Author</h6>
+                    @*<p class="card-text">@t.Genre.Name </p>*@
+                    @Html.ActionLink("Оставить отзыв", "LeaveReview",new{ bookId = t.Id}, new { @class="btn btn-secondary" })
+                </div>
+            </div>
+        </div>
+    }
+</div>

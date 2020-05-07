@@ -65,6 +65,7 @@ namespace BookShop2020.Controllers
                 var client = db.Clients.Find(id);
                 if (client != null)
                 {
+                    newOrder.ClientId = id;
                     if (client.LastName != null)
                         newOrder.LastName = client.LastName;
                     if (client.Name != null)
@@ -92,7 +93,7 @@ namespace BookShop2020.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,LastName,TotalPrice,Status,DeliveryMethod,Date,Address")]Order order)
+        public ActionResult Create([Bind(Include = "Id,ClientId,Name,LastName,TotalPrice,Status,DeliveryMethod,Date,Address")]Order order)
         {
             if (!ModelState.IsValid) return View();
             order.Status = "подтвержден";
@@ -101,7 +102,6 @@ namespace BookShop2020.Controllers
             RemoveCartRecords();
             ChangeDataForAuthUsers(order);
             return RedirectToAction("Index", "Home");
-
         }
 
         private void ChangeDataForAuthUsers(Order order)

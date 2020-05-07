@@ -16,5 +16,6 @@ namespace BookShop2020.Models
         public DbSet<Item> Items { get; set; }
         public DbSet<CartItem> ShoppingCarts { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Review> Reviews { get; set; }
     }
 }

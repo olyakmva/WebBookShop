@@ -195,6 +195,14 @@
     <Compile Include="Migrations\202004190610035_MigrateDB.Designer.cs">
       <DependentUpon>202004190610035_MigrateDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005070545168_MigrateDB1.cs" />
+    <Compile Include="Migrations\202005070545168_MigrateDB1.Designer.cs">
+      <DependentUpon>202005070545168_MigrateDB1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005070733119_MigrateDB2.cs" />
+    <Compile Include="Migrations\202005070733119_MigrateDB2.Designer.cs">
+      <DependentUpon>202005070733119_MigrateDB2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Bestseller.cs" />
@@ -207,6 +215,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Review.cs" />
     <Compile Include="Models\RoleEditModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -400,6 +409,8 @@
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Book\AddCategory.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Client\Comments.cshtml" />
+    <Content Include="Views\Client\LeaveReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
@@ -415,6 +426,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202004061327360_MigrateDb.resx">
       <DependentUpon>202004061327360_MigrateDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005070545168_MigrateDB1.resx">
+      <DependentUpon>202005070545168_MigrateDB1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005070733119_MigrateDB2.resx">
+      <DependentUpon>202005070733119_MigrateDB2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
