@@ -36,6 +36,7 @@ namespace BookShop2020
         //    // Менеджер man@mm.ru Man_123
               // anna@list.ru   User123$
               // vasya@list.ru  Vasya123$
+              // masha@yandex.ru Masha123!
         //    // если создание пользователя прошло успешно
         //    if (result.Succeeded)
         //    {

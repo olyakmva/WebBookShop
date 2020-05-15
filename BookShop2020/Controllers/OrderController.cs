@@ -97,6 +97,11 @@ namespace BookShop2020.Controllers
         {
             if (!ModelState.IsValid) return View();
             order.Status = "подтвержден";
+            if (User.Identity.IsAuthenticated)
+            {
+                var id = User.Identity.GetUserId();
+                order.ClientId = id;
+            }
             db.Entry(order).State = EntityState.Modified;
             db.SaveChanges();
             RemoveCartRecords();

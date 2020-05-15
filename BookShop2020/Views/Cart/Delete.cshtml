@@ -46,8 +46,8 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Удалить" class="btn btn-default" /> |
+        <div class="form-control">
+            <input type="submit" value="Удалить" class="btn btn-secondary" /> |
             @Html.ActionLink("Назад", "Index")
         </div>
     }

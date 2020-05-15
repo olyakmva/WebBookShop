@@ -72,11 +72,12 @@ namespace BookShop2020.Controllers
             if (upload != null)
             {
                 string fileName = System.IO.Path.GetFileName(upload.FileName);
-                if(CheckByGraphicsFormat(fileName))
+                if (CheckByGraphicsFormat(fileName))
                 {
                     SaveImage(upload, fileName);
                     book.ImageUrl = fileName;
                 }
+                else book.ImageUrl = "book.jpg";
             }
             if (!ModelState.IsValid) return View(book);
             db.Books.Add(book);

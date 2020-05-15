@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Security;
 using BookShop2020.Models;
 
 namespace BookShop2020.Controllers
@@ -24,13 +25,15 @@ namespace BookShop2020.Controllers
             }
 
             var list = books.ToList();
+            var bookViewList = new List<BookViewModel>();
             foreach (var book in list)
             {
-                if(book.ImageUrl!=null)
-                    continue;
-                book.ImageUrl = "book.jpg";
+                var item = new BookViewModel {TheBook = book};
+                var reviews  = db.Reviews.Count(x => x.BookId == book.Id);
+                item.ReviewNumber = reviews;
+                bookViewList.Add(item);
             }
-            return View(books.ToList());
+            return View(bookViewList.ToList());
         }
         [HttpPost]
         public ActionResult Search(string searchString)
@@ -89,6 +92,32 @@ namespace BookShop2020.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult ViewBookReviews(int bookId)
+        {
+            Book book = db.Books.Find(bookId);
+            if (book == null)
+            {
+                return HttpNotFound();
+            }
+            book.Genre = db.Categories.Find(book.CategoryId);
+            ViewBag.Book = book;
+            var reviews = db.Reviews.Where(x => x.BookId == bookId).ToList();
+            var list = new List<ReviewViewModel>();
+            foreach (var item in reviews)
+            {
+                var note = new ReviewViewModel {Text = item.Text};
+                var client = db.Clients.Find(item.ClientId);
+                if (client != null)
+                {
+                    note.Name = client.Name;
+                    note.LastName = client.LastName;
+                }
+                list.Add(note);
+            }
+
+            return View(list);
         }
     }
 }

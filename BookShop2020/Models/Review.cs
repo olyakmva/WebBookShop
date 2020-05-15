@@ -16,5 +16,6 @@ namespace BookShop2020.Models
         [DataType(DataType.MultilineText)]
         [Display(Name = "Текст отзыва")]
         public string Text { get; set; } 
+        public Client Owner{ get; set; }
     }
 }
